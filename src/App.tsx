@@ -1,13 +1,27 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
+import { getList } from './data';
+
 class App extends Component {
+  state = {
+    list: []
+  };
+
+  onLocalAdd = () => {
+    this.setState({ list: [...this.state.list, 'locale'] });
+  }
+
+  onRemoteLoad = async () => {
+    // this.setState({ list: [...this.state.list, 'locale'] });
+    const list = await getList();
+    this.setState({ list });
+  }
+
   render() {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
           <p>
             Edit <code>src/App.tsx</code> and save to reload.
           </p>
@@ -20,6 +34,13 @@ class App extends Component {
             Learn React
           </a>
         </header>
+        <ul>
+          {
+            this.state.list.map((item, index) => <li key={index}>{item}</li>)
+          }
+        </ul>
+        <button onClick={this.onLocalAdd}>local add</button>
+        <button onClick={this.onRemoteLoad}>remote load</button>
       </div>
     );
   }
