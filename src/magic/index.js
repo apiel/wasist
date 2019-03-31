@@ -34,29 +34,27 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var _this = this;
 exports.__esModule = true;
-// import express from 'express';
-var express = require('express');
-var data = require("../data");
-var app = express();
-var port = 3005;
-var _loop_1 = function (actionKey) {
-    if (actionKey[0] !== '_') {
-        // console.log('action', action);
-        var action_1 = data[actionKey];
-        // console.log('yo', `/${actionKey}`, action);
-        app.use("/" + actionKey, function (req, res) { return __awaiter(_this, void 0, void 0, function () { var _a, _b; return __generator(this, function (_c) {
-            switch (_c.label) {
+var axios_1 = require("axios");
+function magic(action) {
+    return __awaiter(this, void 0, void 0, function () {
+        var isServer, regGetName, none, name_1, data;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
                 case 0:
-                    _b = (_a = res).send;
-                    return [4 /*yield*/, action_1()];
-                case 1: return [2 /*return*/, _b.apply(_a, [_c.sent()])];
+                    isServer = process.env.SERVER;
+                    regGetName = (/\).(.+);/gim).exec(action.toString());
+                    if (!regGetName) return [3 /*break*/, 3];
+                    none = regGetName[0], name_1 = regGetName[1];
+                    if (!(isServer !== undefined)) return [3 /*break*/, 1];
+                    return [2 /*return*/, action()()];
+                case 1: return [4 /*yield*/, axios_1["default"].post("http://127.0.0.1:3000/" + name_1)];
+                case 2:
+                    data = (_a.sent()).data;
+                    return [2 /*return*/, data];
+                case 3: return [2 /*return*/];
             }
-        }); }); });
-    }
-};
-for (var actionKey in data) {
-    _loop_1(actionKey);
+        });
+    });
 }
-app.listen(port, function () { return console.log("Example app listening on port " + port + "!"); });
+exports.magic = magic;
