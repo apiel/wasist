@@ -39,21 +39,25 @@ exports.__esModule = true;
 // import express from 'express';
 var express = require('express');
 var data = require("../data");
+var bodyParser = require('body-parser');
 var app = express();
 var port = 3005;
+app.use(bodyParser.json());
 var _loop_1 = function (actionKey) {
     if (actionKey[0] !== '_') {
         // console.log('action', action);
         var action_1 = data[actionKey];
-        // console.log('yo', `/${actionKey}`, action);
-        app.use("/" + actionKey, function (req, res) { return __awaiter(_this, void 0, void 0, function () { var _a, _b; return __generator(this, function (_c) {
-            switch (_c.label) {
-                case 0:
-                    _b = (_a = res).send;
-                    return [4 /*yield*/, action_1()];
-                case 1: return [2 /*return*/, _b.apply(_a, [_c.sent()])];
-            }
-        }); }); });
+        app.use("/" + actionKey, function (req, res) { return __awaiter(_this, void 0, void 0, function () {
+            var _a, _b;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0:
+                        _b = (_a = res).send;
+                        return [4 /*yield*/, action_1(req.body)];
+                    case 1: return [2 /*return*/, _b.apply(_a, [_c.sent()])];
+                }
+            });
+        }); });
     }
 };
 for (var actionKey in data) {

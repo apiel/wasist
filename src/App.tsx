@@ -14,7 +14,7 @@ class App extends Component {
 
   onRemoteLoad = async () => {
     // this.setState({ list: [...this.state.list, 'locale'] });
-    const list = await getList();
+    const list = await getList({ foo: 'magic' });
     this.setState({ list });
   }
 

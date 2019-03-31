@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 exports.__esModule = true;
 var axios_1 = require("axios");
-function magic(action) {
+function magic(action, input) {
     return __awaiter(this, void 0, void 0, function () {
         var isServer, regGetName, none, name_1, data;
         return __generator(this, function (_a) {
@@ -44,15 +44,18 @@ function magic(action) {
                 case 0:
                     isServer = process.env.SERVER;
                     regGetName = (/\).(.+);/gim).exec(action.toString());
-                    if (!regGetName) return [3 /*break*/, 3];
+                    if (!regGetName) return [3 /*break*/, 4];
                     none = regGetName[0], name_1 = regGetName[1];
-                    if (!(isServer !== undefined)) return [3 /*break*/, 1];
-                    return [2 /*return*/, action()()];
-                case 1: return [4 /*yield*/, axios_1["default"].post("http://127.0.0.1:3000/" + name_1)];
-                case 2:
+                    if (!(isServer !== undefined)) return [3 /*break*/, 2];
+                    return [4 /*yield*/, action()(input)];
+                case 1: 
+                // instead we could require..
+                return [2 /*return*/, _a.sent()];
+                case 2: return [4 /*yield*/, axios_1["default"].post("http://127.0.0.1:3000/" + name_1, input)];
+                case 3:
                     data = (_a.sent()).data;
                     return [2 /*return*/, data];
-                case 3: return [2 /*return*/];
+                case 4: return [2 /*return*/];
             }
         });
     });

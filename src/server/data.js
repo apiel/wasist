@@ -36,10 +36,16 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 exports.__esModule = true;
 var fs_extra_1 = require("fs-extra");
-function getList() {
+function getList(input) {
     return __awaiter(this, void 0, void 0, function () {
+        var files;
         return __generator(this, function (_a) {
-            return [2 /*return*/, fs_extra_1.readdir('./')];
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, fs_extra_1.readdir('./')];
+                case 1:
+                    files = _a.sent();
+                    return [2 /*return*/, files.map(function (file) { return file + "-" + input.foo + "-" + Math.random(); })];
+            }
         });
     });
 }
