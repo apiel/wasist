@@ -45,7 +45,7 @@ app.post('/getList', function (req, res) { return __awaiter(_this, void 0, void 
     switch (_c.label) {
         case 0:
             _b = (_a = res).send;
-            return [4 /*yield*/, data_1.getList(true)];
+            return [4 /*yield*/, data_1.getList()];
         case 1: return [2 /*return*/, _b.apply(_a, [_c.sent()])];
     }
 }); }); });

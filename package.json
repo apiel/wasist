@@ -17,7 +17,7 @@
     "typescript": "^3.4.1"
   },
   "scripts": {
-    "serv": "tsc src/server/index.ts && node src/server/index.js",
+    "serv": "tsc src/server/index.ts && SERVER=true node src/server/index.js",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

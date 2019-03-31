@@ -1,10 +1,5 @@
-import axios from 'axios';
+import { magic } from './magic';
 
-export async function getList(isServer = false): Promise<string[]> {
-    if (isServer) {
-        return require('./server/data').getList();
-    } else {
-        const { data } = await axios.post('http://127.0.0.1:3000/getList');
-        return data;
-    }
+export function getList(): Promise<string[]> {
+    return magic(() => require('./server/data').getList);
 }
